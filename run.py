@@ -1,10 +1,5 @@
-from flask import Flask
-app = Flask(__name__)   
- 
-@app.route('/')
-def index():
-    #return '<h1>Hola {}!<h1>'.format(__name__)
-    return "hello world"
- 
+import os
+from app import app
 if __name__ == '__main__':
-    app.run(debug=True, port=5002)
+    port = int(os.environ.get("PORT",5000))
+    app.run(debug=True, port=port)
