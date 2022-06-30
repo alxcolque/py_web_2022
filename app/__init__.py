@@ -8,4 +8,7 @@ app.debug = True
 #conexion con las rutas
 from app.routes.welcome_router import welcome_router
 app.register_blueprint(welcome_router)
+
+from app.routes.auth_router import auth_router
+app.register_blueprint(auth_router)
  
