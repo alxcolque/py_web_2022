@@ -1,5 +1,6 @@
-from flask import render_template, request, redirect, url_for
+from flask import flash, render_template, request, redirect, url_for
 from app import db, bcrypt, app
+from sqlalchemy import or_
 from app.models.User import User
 class AuthController():
     def __init__(self):
@@ -31,8 +32,13 @@ class AuthController():
     def signin(self):
         if request.method == 'POST':
             username = request.form['username']
-            email = request.form['username']
             password = request.form['password']
-            return redirect(url_for('welcome_router.home'))
+            user = User.query.filter(or_(User.username == username, User.email == username)).first()
+            if user:
+                if bcrypt.check_password_hash(user.password,password):
+                    return redirect(url_for('welcome_router.home'))
+                
+            flash('Credenciales no válidos..!', 'danger')
+            return redirect(url_for('auth_router.signin'))
         return render_template('auth/signin.html')
 authcontroller = AuthController()
