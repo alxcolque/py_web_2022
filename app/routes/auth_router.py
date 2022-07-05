@@ -10,3 +10,7 @@ def signup():
 @auth_router.route('/signin', methods=['GET','POST'])
 def signin():
     return authcontroller.signin()
+
+@auth_router.route('/logout', methods=['GET','POST'])
+def logout():
+    return authcontroller.logout()

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.98.0">
+    <title>Carousel Template · Bootstrap v5.2</title>
+
+    
+
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    <link href="{{url_for('static', filename='css/carousel.css')}}" rel="stylesheet">
+    {% block css %}
+    <!-- Include external styles -->
+    {% endblock %} 
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Carousel</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Disabled</a>
+                        </li>
+                    </ul>
+                    {% if current_user.is_authenticated %}
+                    <ul class="d-flex navbar-nav mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <p class="nav-link">{{ current_user.name }}</p>
+                            
+                            
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('auth_router.logout')}}">Salir</a>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <ul class="d-flex navbar-nav mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('auth_router.signin')}}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('auth_router.signup')}}">Registrarse</a>
+                        </li>
+                    </ul>
+                    {% endif %}
+                    <!-- <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form> -->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+            <!-- Include external content -->
+        {% endblock %} 
+
+        <!-- Marketing messaging and featurettes
+  ================================================== -->
+        <!-- Wrap the rest of the page in another container to center all the content. -->
+
+        
+
+
+        <!-- FOOTER -->
+        <footer class="container">
+            <p class="float-end"><a href="#">Back to top</a></p>
+            <p>&copy; 2017–2022 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </footer>
+    </main>
+
+<!-- Logout Modal-->
+{% block modals %}
+<!-- Include external styles -->
+{% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+{% block js %}
+    <!-- Include external scripts -->
+{% endblock %} 
+</body>
+</html>
