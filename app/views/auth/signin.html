@@ -53,6 +53,18 @@
                                     {%endfor%}
                                     {%endif%}
                                     {%endwith%}
+                                    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong></strong> {{message}}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                    {%endfor%}
+                                    {%endif%}
+                                    {%endwith%}
                                     <form class="user" action="{{ url_for('auth_router.signin') }}" method="post">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"

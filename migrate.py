@@ -20,4 +20,4 @@ def insertUser():
 db.drop_all()
 db.create_all()
 insertUser()
-
+#python -m pip install PyMySQL[rsa]

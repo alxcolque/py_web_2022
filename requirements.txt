@@ -1,5 +1,5 @@
-flask
-pymysql
-sqlalchemy
-flask-login
-flask-bcrypt
+Flask
+PyMySQL
+Flask-SQLAlchemy
+Flask-Login
+Flask-Bcrypt

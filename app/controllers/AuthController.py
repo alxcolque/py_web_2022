@@ -34,8 +34,8 @@ class AuthController():
             )
             db.session.add(new_user)
             db.session.commit()
-            
-            return redirect(url_for('welcome_router.home'))
+            flash('Registro exitoso..!', 'success')
+            return redirect(url_for('auth_router.signin'))
         return render_template('auth/signup.html')
     def signin(self):
         if request.method == 'POST':
