@@ -1,4 +1,9 @@
 from app.models.User import User
+from app.models.Client import Client
+from app.models.Sale import Sale
+from app.models.Product import Product
+from app.models.Image import Image
+from app.models.Detail import Detail
 from app import db, bcrypt, app
 def insertUser():
     id=1
