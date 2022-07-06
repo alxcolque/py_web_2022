@@ -1,14 +1,45 @@
 {% extends 'layout/app.html' %}
-<!-- Content -->
+
 {% block content %}
-    <h1>Lista de usuarios</h1>
-    {% for row in users %}
-    <li>{{row.id}}</li>
-    <li>{{row.name}}</li>
-    <li>{{row.username}}</li>
-    <li>{{row.email}}</li>
-    <li>{{row.role}}</li>
-    {% endfor %}
+
+            <div class="card">
+                <div class="card-header">
+                    <h1>Inicio de Tareas</h1>
+                </div>
+                <div class="card-body">
+                    <!-- table -->
+                    <table id="tblUsers" class="display nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombres</th>
+                                <th>Usuario</th>
+                                <th>Correo</th>
+                                <th>Rol</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in users %}
+                            <tr>
+                                <td>{{row.id}}</td>
+                                <td>{{row.name}}</td>
+                                <td>{{row.username}}</td>
+                                <td>{{row.email}}</td>
+                                <td>{{row.role}}</td>
+                                <td>Eliminar</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- end table -->
+                </div>
+
+                <div class="card-footer">
+
+                </div>
+            </div>
+    
     
 {% endblock %}
 <!-- Modals -->
@@ -17,11 +48,22 @@
 {% endblock %}
 <!-- Styles -->
 {% block css %}
-
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
 {% endblock %}
 <!-- Scripts -->
 {% block js %}
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script>
+    $.extend($.fn.dataTable.defaults, {
+        responsive: true
+    });
 
+    $(document).ready(function () {
+        $('#tblUsers').DataTable();
+    });
+</script>
 {% endblock %}
 
 
