@@ -29,4 +29,7 @@ app.register_blueprint(welcome_router)
 
 from app.routes.auth_router import auth_router
 app.register_blueprint(auth_router)
+
+from app.routes.user_router import user_router
+app.register_blueprint(user_router)
  

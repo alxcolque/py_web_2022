@@ -1,0 +1,28 @@
+{% extends 'layout/app.html' %}
+<!-- Content -->
+{% block content %}
+    <h1>Lista de usuarios</h1>
+    {% for row in users %}
+    <li>{{row.id}}</li>
+    <li>{{row.name}}</li>
+    <li>{{row.username}}</li>
+    <li>{{row.email}}</li>
+    <li>{{row.role}}</li>
+    {% endfor %}
+    
+{% endblock %}
+<!-- Modals -->
+{% block modals %}
+
+{% endblock %}
+<!-- Styles -->
+{% block css %}
+
+{% endblock %}
+<!-- Scripts -->
+{% block js %}
+
+{% endblock %}
+
+
+

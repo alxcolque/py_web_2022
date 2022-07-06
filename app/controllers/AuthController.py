@@ -3,6 +3,7 @@ from app import db, bcrypt, app
 from flask_login import LoginManager, login_user, logout_user, current_user
 from sqlalchemy import or_
 from app.models.User import User
+from app.models.Client import Client
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -33,6 +34,10 @@ class AuthController():
                 role = role
             )
             db.session.add(new_user)
+            db.session.commit()
+
+            new_client = Client(user_id = new_user.id, phone = '')
+            db.session.add(new_client)
             db.session.commit()
             flash('Registro exitoso..!', 'success')
             return redirect(url_for('auth_router.signin'))
