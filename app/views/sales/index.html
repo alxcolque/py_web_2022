@@ -1,0 +1,98 @@
+{% extends 'layout/app.html' %}
+
+{% block content %}
+
+            <div class="card">
+                <div class="card-header">
+                    <h1>Ventas</h1>
+                </div>
+                <div class="card-body">
+                    {% with messages = get_flashed_messages(category_filter=["danger"]) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong></strong> {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                    {%endfor%}
+                    {%endif%}
+                    {%endwith%}
+                    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong></strong> {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                    {%endfor%}
+                    {%endif%}
+                    {%endwith%}
+                    <!-- table -->
+                    <div class="d-flex">
+                        <a href="" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Nueva Venta</a>
+                    </div>
+                    <table id="tblsales" class="display nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Factura</th>
+                                <th>Total</th>
+                                <th>Fecha</th>
+                                <th class="text-center">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in sales %}
+                            <tr>
+                                <td>{{row.id}}</td>
+                                <td>{{row.invoce}}</td>
+                                <td>{{row.total}}</td>
+                                <td>{{row.create_at}}</td>
+                                <td class="text-center">
+                                    <a href="{{url_for('product_router.destroy', id = row.id)}}" class="btn btn-danger btn-sm" onclick="return confirm('¿Desea eliminar este registro?')"><i class="fa fa-times"></i></a>
+                                    <a href="{{url_for('product_router.edit', id = row.id)}}" class="btn btn-dark btn-sm"><i class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- end table -->
+                </div>
+
+                <div class="card-footer">
+
+                </div>
+            </div>
+    
+    
+{% endblock %}
+<!-- Modals -->
+{% block modals %}
+
+{% endblock %}
+<!-- Styles -->
+{% block css %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+{% endblock %}
+<!-- Scripts -->
+{% block js %}
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script>
+    $.extend($.fn.dataTable.defaults, {
+        responsive: true
+    });
+
+    $(document).ready(function () {
+        $('#tblsales').DataTable();
+    });
+</script>
+{% endblock %}
+
+
+
