@@ -33,3 +33,5 @@ app.register_blueprint(auth_router)
 from app.routes.user_router import user_router
 app.register_blueprint(user_router)
  
+from app.routes.product_router import product_router
+app.register_blueprint(product_router)
