@@ -50,7 +50,7 @@ class ProductController():
         product = db.session.query(Product).filter(Product.id==_id).one()
         db.session.delete(product)
         db.session.commit()
-        flash('Producto eilminado con éxito..!', 'success')
+        flash('Producto eliminado con éxito..!', 'success')
         return redirect(url_for('product_router.index'))
 
 productcontroller = ProductController()
