@@ -20,6 +20,12 @@ def destroy(id):
 @product_router.route('/products/edit/<id>', methods=['GET'])
 def edit(id):
     return productcontroller.edit(id)
+@product_router.route('/products/editimage/<id>', methods=['GET'])
+def editimage(id):
+    return productcontroller.editimage(id)
 @product_router.route('/products/update/<id>', methods=['POST'])
 def update(id):
     return productcontroller.update(id)
+@product_router.route('/product/addimage',methods=['POST'])
+def storeImage():
+    return productcontroller.storeImage()

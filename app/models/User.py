@@ -14,6 +14,6 @@ class User(db.Model, UserMixin):
     create_at = db.Column(TIMESTAMP, nullable=False, server_default=func.now())
     update_at = db.Column(DateTime, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
     #on cascade
-    users = relationship("Client", cascade="all, delete")
+    users = db.relationship("Client", cascade="all, delete")
     #relationship
-    client=db.relationship('Client', backref='user', lazy='dynamic')
+    #client=db.relationship('Client', backref='user', lazy='dynamic')

@@ -12,3 +12,5 @@ class Product(db.Model):
     update_at = db.Column(DateTime, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
     #relationship
     detalle=db.relationship('Detail', backref='product', lazy='dynamic')
+    #relationship
+    image=db.relationship('Image', backref='product', lazy='dynamic')
