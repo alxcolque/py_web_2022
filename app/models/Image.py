@@ -5,7 +5,7 @@ class Image(db.Model):
     __tablename__="images"
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     # foreign key
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id', ondelete="CASCADE"))
     invoice = db.Column(db.String(150), nullable=True)
     status = db.Column(db.String(30), nullable=True)
     

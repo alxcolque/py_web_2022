@@ -5,7 +5,7 @@ class Sale(db.Model):
     __tablename__="sales"
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     # foreign key
-    client_id = db.Column(db.Integer, db.ForeignKey('clients.id'))
+    client_id = db.Column(db.Integer, db.ForeignKey('clients.id',ondelete="CASCADE"))
 
     status = db.Column(db.String(30))
     invoice = db.Column(db.String(1500), nullable=True)
