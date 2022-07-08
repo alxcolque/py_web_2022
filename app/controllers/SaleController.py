@@ -43,4 +43,10 @@ class SaleController():
             suma = suma + row.product.price*row.quantity
         
         return render_template('sales/mycart.html', detail=detail, total=suma)
+    def deteleItem(self, _id):
+        detail = Detail.query.get(_id)
+        db.session.delete(detail)
+        db.session.commit()
+        flash('Item eliminado con éxito..!', 'success')
+        return redirect(url_for('sale_router.showcart'))
 salecontroller = SaleController()

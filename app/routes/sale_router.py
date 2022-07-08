@@ -14,3 +14,7 @@ def addcart(id):
 @sale_router.route('/showcart', methods=['GET'])
 def showcart():
     return salecontroller.showcart()
+
+@sale_router.route('/cartitem/delete/<id>', methods=['GET'])
+def deteleItem(id):
+    return salecontroller.deteleItem(id)
