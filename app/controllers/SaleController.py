@@ -1,5 +1,6 @@
 from flask_login import current_user
 from flask import flash, redirect, render_template, url_for
+from app.models.Product import Product
 from app.models.Sale import Sale
 from app.models.Detail import Detail
 from app.models.Client import Client
@@ -31,6 +32,15 @@ class SaleController():
         
         return redirect(url_for('welcome_router.index'))
     def showcart(self):
-        sales = Sale.query.all()
-        return render_template('sales/mycart.html', sales=sales)
+        client = db.session.query(Client).filter(Client.user_id==current_user.id).first()
+        detail = Detail.query\
+            .join(Product, Product.id==Detail.product_id)\
+            .join(Sale, Sale.id==Detail.sale_id)\
+            .filter(Sale.client_id==client.id)\
+            .all()
+        suma = 0
+        for row in detail:
+            suma = suma + row.product.price*row.quantity
+        
+        return render_template('sales/mycart.html', detail=detail, total=suma)
 salecontroller = SaleController()

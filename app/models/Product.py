@@ -10,3 +10,5 @@ class Product(db.Model):
 
     create_at = db.Column(TIMESTAMP, nullable=False, server_default=func.now())
     update_at = db.Column(DateTime, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    #relationship
+    detalle=db.relationship('Detail', backref='product', lazy='dynamic')
