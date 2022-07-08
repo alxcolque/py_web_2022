@@ -64,5 +64,23 @@ class SaleController():
             db.session.commit()
         flash('Pedido realizado con éxito..!', 'success')
         return redirect(url_for('sale_router.showcart'))
+    #Methods for admin
+    def showDetail(self, sale_id):
+        sale = db.session.query(Sale).filter(Sale.id==sale_id).first()
+        detail = Detail.query\
+            .join(Product, Product.id==Detail.product_id)\
+            .join(Sale, Sale.id==Detail.sale_id)\
+            .filter(Detail.sale_id==sale_id)\
+            .all()
+        suma = 0
+        for row in detail:
+            suma = suma + row.product.price*row.quantity
+        
+        return render_template('sales/saledetail.html', detail=detail, total=suma, sale=sale)
+    def confirmSale(self, _id):
+        sale = db.session.query(Sale).filter(Sale.id==_id).filter(Sale.status=='PENDIENTE').first()
+        sale.status = 'ACEPTADO'
+        db.session.commit()
+        return redirect(url_for('sale_router.index'))
 
 salecontroller = SaleController()

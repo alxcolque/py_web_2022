@@ -1,0 +1,101 @@
+{% extends 'layout/app.html' %}
+
+{% block content %}
+<div class="card">
+
+    <div class="card-body">
+        {% with messages = get_flashed_messages(category_filter=["danger"]) %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong></strong> {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {%endfor%}
+        {%endif%}
+        {%endwith%}
+        {% with messages = get_flashed_messages(category_filter=["success"]) %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong></strong> {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {%endfor%}
+        {%endif%}
+        {%endwith%}
+        <!-- table -->
+        <div class="d-flex text-center">
+            <a href="" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left"></i> Volver atrás</a>
+        </div>
+        <div class="row">
+            <div class="col-md 6">
+                <b>Nombre del cliente:</b><span> {{sale.client.user.name}}</span><br>
+                <b>CI/NIT:</b><span> 7344464010</span><br>
+                <b>Teléfono:</b><span> +59164455</span><br>
+            </div>
+            <div class="col-md 6 align-right">
+                <b>Fecha:</b><span> {{sale.update_at}}</span><br>
+                <b>Estado:</b><span> {{sale.status}}</span><br>
+            </div>
+        </div>
+        <div class="card-header text-center">
+            <h1>Detalle de venta</h1>
+        </div>
+        <table id="tblsales" class="table" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Descripción</th>
+                    <th>Foto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in detail %}
+                <tr>
+                    <td>{{row.id}}</td>
+                    <td>{{row.product.description}}</td>
+                    <td>{{row.product.price}}</td>
+                    <td>Foto.png</td>
+                    <td>{{row.quantity}}</td>
+                    <td>{{(row.product.price*row.quantity)|round(2)}}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TOTAL:Bs.</td>
+                    <td>{{total|round(2)}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- end table -->
+    </div>
+
+    <div class="card-footer">
+
+    </div>
+</div>
+
+
+{% endblock %}
+<!-- Modals -->
+{% block modals %}
+
+{% endblock %}
+<!-- Styles -->
+{% block css %}
+
+{% endblock %}
+<!-- Scripts -->
+{% block js %}
+{% endblock %}

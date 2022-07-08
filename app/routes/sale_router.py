@@ -26,3 +26,11 @@ def updatequantity(id, qu):
 @sale_router.route('/buyup', methods=['GET'])
 def buyup():
     return salecontroller.buyUp()
+#admin routes
+@sale_router.route('/sales/showdetail/<id>', methods=['GET'])
+def showdetail(id):
+    return salecontroller.showDetail(id)
+
+@sale_router.route('/sales/confirmsale/<id>', methods=['GET'])
+def confirmsale(id):
+    return salecontroller.confirmSale(id)

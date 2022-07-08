@@ -2,73 +2,76 @@
 
 {% block content %}
 
-            <div class="card">
-                <div class="card-header">
-                    <h1>Ventas</h1>
-                </div>
-                <div class="card-body">
-                    {% with messages = get_flashed_messages(category_filter=["danger"]) %}
-                    {% if messages %}
-                    {% for message in messages %}
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong></strong> {{message}}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                    {%endfor%}
-                    {%endif%}
-                    {%endwith%}
-                    {% with messages = get_flashed_messages(category_filter=["success"]) %}
-                    {% if messages %}
-                    {% for message in messages %}
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong></strong> {{message}}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                    {%endfor%}
-                    {%endif%}
-                    {%endwith%}
-                    <!-- table -->
-                    <div class="d-flex">
-                        <a href="" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Nueva Venta</a>
-                    </div>
-                    <table id="tblsales" class="display nowrap" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Factura</th>
-                                <th>Total</th>
-                                <th>Fecha</th>
-                                <th class="text-center">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for row in sales %}
-                            <tr>
-                                <td>{{row.id}}</td>
-                                <td>{{row.invoce}}</td>
-                                <td>{{row.total}}</td>
-                                <td>{{row.create_at}}</td>
-                                <td class="text-center">
-                                    <a href="{{url_for('product_router.destroy', id = row.id)}}" class="btn btn-danger btn-sm" onclick="return confirm('¿Desea eliminar este registro?')"><i class="fa fa-times"></i></a>
-                                    <a href="{{url_for('product_router.edit', id = row.id)}}" class="btn btn-dark btn-sm"><i class="fa fa-edit"></i></a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <!-- end table -->
-                </div>
+<div class="card">
+    <div class="card-header">
+        <h1>Ventas</h1>
+    </div>
+    <div class="card-body">
+        {% with messages = get_flashed_messages(category_filter=["danger"]) %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong></strong> {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {%endfor%}
+        {%endif%}
+        {%endwith%}
+        {% with messages = get_flashed_messages(category_filter=["success"]) %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong></strong> {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {%endfor%}
+        {%endif%}
+        {%endwith%}
+        <!-- table -->
+        <table id="tblsales" class="display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Factura</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th class="text-center">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in sales %}
+                <tr>
+                    <td>{{row.id}}</td>
+                    <td>{{row.invoce}}</td>
+                    <td>{{row.total}}</td>
+                    <td>{{row.status}}</td>
+                    <td>{{row.create_at}}</td>
+                    <td class="text-center">
+                        {% if row.status == 'PENDIENTE'%}
+                        <a href="{{url_for('sale_router.confirmsale', id = row.id)}}" class="btn btn-success btn-sm"
+                            onclick="return confirm('¿Está seguro de aceptar el pedido?')"><i class="fa fa-check"></i></a>
+                        {% endif %}
+                        <a href="{{url_for('sale_router.showdetail', id = row.id)}}" class="btn btn-info btn-sm"><i
+                                class="fa fa-eye"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- end table -->
+    </div>
 
-                <div class="card-footer">
+    <div class="card-footer">
 
-                </div>
-            </div>
-    
-    
+    </div>
+</div>
+
+
 {% endblock %}
 <!-- Modals -->
 {% block modals %}
@@ -93,6 +96,3 @@
     });
 </script>
 {% endblock %}
-
-
-

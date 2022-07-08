@@ -11,3 +11,5 @@ class Client(db.Model):
     cinit = db.Column(db.String(30), unique=True, nullable=True)
     create_at = db.Column(TIMESTAMP, nullable=False, server_default=func.now())
     update_at = db.Column(DateTime, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"))
+    #relationship
+    sale=db.relationship('Sale', backref='client', lazy='dynamic')
