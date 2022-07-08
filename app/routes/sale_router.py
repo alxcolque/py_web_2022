@@ -18,3 +18,11 @@ def showcart():
 @sale_router.route('/cartitem/delete/<id>', methods=['GET'])
 def deteleItem(id):
     return salecontroller.deteleItem(id)
+
+@sale_router.route('/cartitem/quantity/<id>/<qu>', methods=['GET'])
+def updatequantity(id, qu):
+    return salecontroller.updateQuantity(id, qu)
+
+@sale_router.route('/buyup', methods=['GET'])
+def buyup():
+    return salecontroller.buyUp()

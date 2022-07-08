@@ -37,6 +37,7 @@ class SaleController():
             .join(Product, Product.id==Detail.product_id)\
             .join(Sale, Sale.id==Detail.sale_id)\
             .filter(Sale.client_id==client.id)\
+            .filter(Sale.status=='CARRITO')\
             .all()
         suma = 0
         for row in detail:
@@ -49,4 +50,19 @@ class SaleController():
         db.session.commit()
         flash('Item eliminado con éxito..!', 'success')
         return redirect(url_for('sale_router.showcart'))
+    def updateQuantity(self,_id, qu):
+        detail = Detail.query.get(_id)
+        detail.quantity = qu
+        db.session.commit()
+        #flash('Item eliminado con éxito..!', 'success')
+        return "ok"
+    def buyUp(self):
+        client = db.session.query(Client).filter(Client.user_id==current_user.id).first()
+        if(bool(db.session.query(Sale).filter(Sale.status=='CARRITO', Sale.client_id==client.id).first())):
+            sale = db.session.query(Sale).filter(Sale.status=='CARRITO').filter(Sale.client_id==client.id).first()
+            sale.status = 'PENDIENTE'
+            db.session.commit()
+        flash('Pedido realizado con éxito..!', 'success')
+        return redirect(url_for('sale_router.showcart'))
+
 salecontroller = SaleController()
